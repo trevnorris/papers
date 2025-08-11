@@ -42,7 +42,7 @@ This repository contains a complete mathematical framework demonstrating that th
 Contains the complete LaTeX source for the academic paper.
 
 **Contents:**
-- `main.tex` - Full paper with mathematical derivations, proofs, and physical interpretation
+- `golden_ratio.tex` - Full paper with mathematical derivations, proofs, and physical interpretation
 - Supporting files for bibliography, figures, and formatting
 
 **Key Sections:**
@@ -104,7 +104,7 @@ pip install numpy scipy matplotlib sympy
 
 ### Quick Start
 
-1. **View the paper**: Compile `doc/main.tex` with LaTeX
+1. **View the paper**: Compile `doc/golden_ratio.tex` with LaTeX
 2. **See the math in action**: Run `python calculations/golden_ratio_calculations.py`
 3. **Verify correctness**: Run `python derivations/golden_ratio_verification.py`
 
