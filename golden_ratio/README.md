@@ -65,7 +65,13 @@ Interactive visualizations and demonstrations of all key mathematical concepts.
 - Physical twist rate scaling laws and parameter examples
 - Three routes to logarithmic term (elastic defects, overlap model, scale invariance)
 - Fibonacci connections and continued fraction analysis
-- Comprehensive visualizations with 15+ detailed plots
+- Lyapunov descent demonstration: E(T(x)) ≤ E(x) proves φ is dynamic attractor
+- Contraction theorem verification: |(T²)'(x)| ≤ 1/4 guarantees convergence
+- Enhanced Fibonacci analysis showing T-map governs ALL generalized sequences
+- Perturbation stability with different epsilon thresholds for various perturbation types
+- Physical predictions: even-odd oscillations, relaxation time scaling, energy dissipation
+- Metallic means family extension and broader mathematical framework
+- Comprehensive visualizations with **22+ detailed plots across 11 figure sets**
 
 **Output:** Mathematical verification plus rich visualizations showing:
 - Energy minimization dynamics
@@ -73,6 +79,10 @@ Interactive visualizations and demonstrations of all key mathematical concepts.
 - Quantitative robustness bounds under realistic perturbations
 - Physical scaling relationships for experimental validation
 - Deep mathematical connections to natural growth patterns
+- Lyapunov descent trajectories proving φ is universal dynamic attractor
+- Geometric convergence with |(T²)'(x)| ≤ 1/4 contraction verification
+- Enhanced perturbation stability analysis with critical epsilon thresholds
+- Physical predictions: even-odd oscillations, relaxation scaling, energy dissipation bursts
 
 ### ✅ `/derivations/` - Mathematical Verification
 Comprehensive verification that every mathematical claim in the paper is correct.
@@ -81,13 +91,19 @@ Comprehensive verification that every mathematical claim in the paper is correct
 
 **Verification Philosophy:** *"Assume nothing is correct, verify everything independently"*
 
-**What it verifies (40+ tests):**
+**What it verifies (64 tests across 16 categories):**
 - All equation derivations and algebraic manipulations
 - Dimensional consistency of every physical quantity  
 - Numerical accuracy of all approximations
 - Theorem statements and proof logic
 - Boundary conditions and limiting behaviors
 - Cross-validation using multiple computational methods
+- Lyapunov descent property: E(T(x)) ≤ E(x) with equality only at φ
+- Contraction theorem: |(T²)'(x)| ≤ 1/4 guaranteeing geometric convergence
+- Fibonacci universality: r_{n+1} = T(r_n) for ALL generalized sequences
+- Physical predictions: even-odd oscillations, relaxation time scaling
+- Perturbation stability analysis with different epsilon thresholds
+- Metallic means extension and broader mathematical framework
 
 **Quality Assurance:**
 - Symbolic computation using SymPy (exact, not floating-point)
@@ -117,7 +133,7 @@ pip install numpy scipy matplotlib sympy
 
 **Verification Output:**
 ```
-GOLDEN RATIO PAPER VERIFICATION SUMMARY: 40/40 checks passed (100.0%)
+GOLDEN RATIO PAPER VERIFICATION SUMMARY: 64/64 checks passed (100.0%)
 🎉 GOLDEN RATIO PAPER MATHEMATICAL VERIFICATION COMPLETE! 🎉
 ```
 
@@ -128,6 +144,10 @@ GOLDEN RATIO PAPER VERIFICATION SUMMARY: 40/40 checks passed (100.0%)
 - **Quantitative robustness theorem** with explicit bounds on deviations
 - **Multiple independent derivations** confirming the logarithmic relaxation term
 - **Connection to optimal irrationality** via continued fraction theory
+- **Lyapunov descent theorem** proving φ is unique dynamic attractor under self-similarity
+- **Contraction mapping theorem** with |(T²)'(x)| ≤ 1/4 guaranteeing geometric convergence
+- **Fibonacci universality proof** showing T-map governs ALL generalized Fibonacci sequences
+- **Enhanced stability analysis** with critical epsilon thresholds for different perturbation types
 
 ### Physical Applications
 **Candidate Systems:**
@@ -142,6 +162,10 @@ GOLDEN RATIO PAPER VERIFICATION SUMMARY: 40/40 checks passed (100.0%)
 - Twist rates should follow `τ = 2π/(√φ ξₕ)`
 - Structures should be robust against moderate perturbations
 - Rational pitch ratios should be actively avoided
+- Even-odd convergence oscillations with |x_{n+2} - φ| ≤ (1/4)|x_n - φ|
+- Relaxation time scaling: τ_relax ~ -ln|x₀ - φ|/ln(4) in reorganization events
+- Energy dissipation bursts during approach to φ (measurable via calorimetry)
+- Log-log slope signature approaching -ln(2) ≈ -0.693 in error decay
 
 ### Broader Impact
 - Provides mathematical foundation for φ in natural systems
@@ -159,6 +183,9 @@ GOLDEN RATIO PAPER VERIFICATION SUMMARY: 40/40 checks passed (100.0%)
 | **Robustness Bound** | `\|x* - φ\| ≤ √(2Δ/m)` | Quantitative stability under perturbations |
 | **Physical Scaling** | `τ = 2π/(√φ ξₕ)` | Measurable twist rate relationship |
 | **Optimal Irrationality** | `φ = [1; 1, 1, 1, ...]` | Maximal resistance to rational approximation |
+| **Lyapunov Descent** | `E(T(x)) ≤ E(x), equality ⟺ x = φ` | φ is unique dynamic attractor |
+| **Contraction Theorem** | `\|(T²)'(x)\| ≤ 1/4` | Guarantees geometric convergence to φ |
+| **Fibonacci Universality** | `r_{n+1} = T(r_n)` for ALL sequences | T-map governs generalized Fibonacci ratios |
 
 ## Citation
 
@@ -183,4 +210,4 @@ trev.norris@gmail.com
 
 ---
 
-*This work demonstrates that the golden ratio φ = (1+√5)/2 is not a mysterious constant imposed from outside, but rather a mathematical necessity arising from the fundamental structure of hierarchical physical systems. Through rigorous mathematical analysis and comprehensive verification, we show that φ emerges inevitably as the unique solution that simultaneously satisfies energy minimization, self-similarity, robustness, and optimal irrationality requirements.*
+*This work demonstrates that the golden ratio φ = (1+√5)/2 is not a mysterious constant imposed from outside, but rather a mathematical necessity arising from the fundamental structure of hierarchical physical systems. Through rigorous mathematical analysis and comprehensive verification, we show that φ emerges inevitably as the unique solution that simultaneously satisfies energy minimization, self-similarity, robustness, optimal irrationality, **and dynamical stability** requirements. The new Lyapunov descent and contraction theorems prove that φ is not just a static optimum, but the **universal dynamic attractor** that systems naturally evolve toward through self-similar reorganization processes, unifying static optimization with dynamic evolution.*
