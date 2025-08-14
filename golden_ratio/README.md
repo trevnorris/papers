@@ -1,213 +1,191 @@
 # Golden Ratio from Energy Minimization and Self-Similarity
 
-**A mathematical proof that the golden ratio φ = (1+√5)/2 emerges naturally as the optimal configuration for hierarchical vortex structures**
+**Claim (under stated assumptions):** the golden ratio
+\(\displaystyle \varphi=\frac{1+\sqrt{5}}{2}\)
+emerges as the unique minimizer of a strictly convex reduced energy for hierarchical, helical/braided filamentary structures (e.g., vortices, disclinations, flux tubes), and as a dynamic attractor of a natural self-similar reorganization map.
 
-## Abstract
+---
 
-This repository contains a complete mathematical framework demonstrating that the golden ratio φ emerges inevitably from energy minimization in hierarchical braided configurations of filamentary defects (vortices, disclinations, magnetic flux tubes, etc.). Rather than being imposed externally, φ arises as the unique solution to fundamental physical constraints.
+## Overview
 
-### Key Results
+We study a one-parameter, coarse-grained description of pitch versus a coherence scale. Let \(P\) be the helical pitch and \(\xi_h\) a hierarchy (coherence) length. Define the squared, dimensionless pitch
+\[
+x \;=\; \bigl(P/\xi_h\bigr)^2 \;>\; 1 .
+\]
+A broad energetic ansatz balances a convex packing cost against a scale-opening relaxation term:
+\[
+E_{a,b}(x)\;=\;\tfrac{a}{2}\,(x-1)^2 \;-\; b\,\ln x, \qquad a,b>0 .
+\]
+The unique minimizer is the **metallic mean**
+\[
+x_\star \;=\; \mu_{b/a} \;=\; \frac{1+\sqrt{1+4(b/a)}}{2}.
+\]
+A natural, model-independent requirement—that **adding a layer and rescaling** acts as a **strict Lyapunov descent step**—selects the normalized case \(a=b\), for which
+\[
+E(x)=\tfrac12(x-1)^2-\ln x \quad\Longrightarrow\quad x_\star=\varphi .
+\]
 
-🔬 **Mathematical Framework**
-- Energy functional: `E(x) = ½(x-1)² - ln(x)` where `x = (P/ξₕ)²`
-- Unique global minimum at `x* = φ = (1+√5)/2 ≈ 1.618034`
-- Self-similarity map: `T(x) = 1 + 1/x` with fixed point `T(φ) = φ`
+---
 
-🎯 **Physical Predictions**
-- Optimal pitch: `P* = √φ ξₕ ≈ 1.272 ξₕ`
-- Twist rate scaling: `τ* = 2π/(√φ ξₕ)`
-- Robustness bound: `|x* - φ| ≤ √(2Δ/m)` under perturbations
-- Avoidance of commensurate (rational) pitch ratios
+## Self-Similarity and Selection Mechanisms
 
-🌟 **Deep Connections**
-- Three independent routes to logarithmic relaxation term
-- Fibonacci sequence: `φ = lim(Fₙ₊₁/Fₙ)`
-- Continued fractions: `φ = [1; 1, 1, 1, ...]` (most irrational number)
-- Topological protection against reconnection events
+### Layer-addition map
+- Exact layering acts most naturally on the **linear** pitch \(r=P/\xi_h\):
+  \(\widehat T(r)=1+\frac{1}{r}\).
+- With \(x=r^2\), the induced map on \(x\) is
+  \(S(x)=\bigl(1+1/\sqrt{x}\bigr)^2\).
+- For analysis we use the convenient surrogate \(T(x)=1+\frac{1}{x}\) directly on \(x\); near the optimum the two agree to leading order. The paper details the correspondence.
 
-## Physical Interpretation
+### Two routes to \(\varphi\)
+1) **Global self-similar descent (Lyapunov principle).**
+   Demand \(E_{a,b}(Tx)\le E_{a,b}(x)\) for all \(x>1\), with equality only at the fixed point. This **forces \(a=b\)**, giving the normalized energy \(E(x)=\tfrac12(x-1)^2-\ln x\) and minimizer \(x_\star=\varphi\).
 
-**The Problem**: When filamentary structures (vortex lines, magnetic flux tubes, optical vortex beams) organize into helical or braided patterns, they must choose a pitch - how tightly to wrap one layer around another. Too tight and overlap/strain costs explode; too loose and the structure cannot lock in.
+2) **Exact invariance.**
+   For strictly convex \(E\), if \(E\circ T=E\) exactly on \((1,\infty)\), then the unique minimizer must be the fixed point of \(T\), i.e., \(\varphi\).
 
-**The Solution**: The golden ratio φ represents the unique balance point where:
-- **Quadratic term `½(x-1)²`**: Penalizes deviations from natural spacing
-- **Logarithmic term `-ln(x)`**: Rewards multi-scale relaxation opportunities
-- **Irrationality**: Avoids destructive resonances from periodic alignments
+---
 
-**Why φ?**: Among all real numbers, φ has the slowest-converging continued fraction expansion `[1; 1, 1, 1, ...]`, making it the "most irrational" number and maximally resistant to rational approximations that would create resonant catastrophes.
+## Robustness (Quantitative)
 
-## Repository Structure
+Real media break exact self-similarity mildly (finite core size, anisotropy, boundaries). Let \(I=[1+\eta,\,X]\) be a physically admissible compact interval and define
+\[
+\Delta_I\;=\;\sup_{x\in I}\,\bigl|E(Tx)-E(x)\bigr|, \qquad
+m\;=\;\inf_{x\in I} E''(x) \;>\; 0 .
+\]
+**Robustness bound:** if \(E\) is \(m\)-strongly convex on \(I\) and \(\Delta_I\) is small, the minimizer satisfies
+\[
+\bigl|x_\star-\varphi\bigr| \;\le\; \sqrt{\,2\Delta_I/m\,}.
+\]
+For the normalized energy \(E(x)=\tfrac12(x-1)^2-\ln x\), \(E''(x)=1+1/x^2\ge 1\) on \(x>0\), so \(m\ge 1\).
 
-### 📄 `/doc/` - Paper Documentation
-Contains the complete LaTeX source for the academic paper.
+---
 
-**Contents:**
-- `golden_ratio.tex` - Full paper with mathematical derivations, proofs, and physical interpretation
-- Supporting files for bibliography, figures, and formatting
+## Dynamics and Convergence
 
-**Key Sections:**
-- Mathematical framework and energy functional derivation
-- Self-similarity arguments and fixed-point theorems  
-- Robustness analysis with quantitative bounds
-- Three independent routes to logarithmic relaxation
-- Physical applications and experimental predictions
-- Connections to Fibonacci numbers and continued fractions
+- **Lyapunov descent (normalized case \(a=b\))**:
+  \(E(Tx)\le E(x)\), with equality only at \(x=\varphi\). Thus \(\varphi\) is the unique **dynamic attractor** of the \(T\)-iteration.
 
-### 🧮 `/calculations/` - Mathematical Demonstrations
-Interactive visualizations and demonstrations of all key mathematical concepts.
+- **Contraction:**
+  \(T:(1,\infty)\to(1,2)\), \(T^2:(1,\infty)\to[3/2,2]\), and
+  \[
+  (T^2)'(x)=\frac{1}{x^2\,T(x)^2}\;\le\;\frac{1}{4} \quad \text{on } [3/2,2].
+  \]
+  Hence the **even subsequence** is a contraction on \([3/2,2]\) and the full iteration converges to \(\varphi\).
+  On a **semilog** plot of \(\log|x_n-\varphi|\) vs \(n\), the slope tends to \(-\ln 2\).
 
-**Main Script:** `golden_ratio_calculations.py`
+---
 
-**What it demonstrates:**
-- Energy landscape showing unique minimum at φ
-- Self-similarity map convergence to fixed point
-- Robustness theorem verification with multiple perturbation types
-- Physical twist rate scaling laws and parameter examples
-- Three routes to logarithmic term (elastic defects, overlap model, scale invariance)
-- Fibonacci connections and continued fraction analysis
-- Lyapunov descent demonstration: E(T(x)) ≤ E(x) proves φ is dynamic attractor
-- Contraction theorem verification: |(T²)'(x)| ≤ 1/4 guarantees convergence
-- Enhanced Fibonacci analysis showing T-map governs ALL generalized sequences
-- Perturbation stability with different epsilon thresholds for various perturbation types
-- Physical predictions: even-odd oscillations, relaxation time scaling, energy dissipation
-- Metallic means family extension and broader mathematical framework
-- Comprehensive visualizations with **22+ detailed plots across 11 figure sets**
+## Physical Interpretation and Predictions
 
-**Output:** Mathematical verification plus rich visualizations showing:
-- Energy minimization dynamics
-- Fixed-point convergence from multiple starting points
-- Quantitative robustness bounds under realistic perturbations
-- Physical scaling relationships for experimental validation
-- Deep mathematical connections to natural growth patterns
-- Lyapunov descent trajectories proving φ is universal dynamic attractor
-- Geometric convergence with |(T²)'(x)| ≤ 1/4 contraction verification
-- Enhanced perturbation stability analysis with critical epsilon thresholds
-- Physical predictions: even-odd oscillations, relaxation scaling, energy dissipation bursts
+- **Preferred pitch:**
+  \(P^\star=\sqrt{\varphi}\,\xi_h \approx 1.272\,\xi_h\).
+- **Twist-rate law (at optimum):**
+  \(\displaystyle \tau^\star=\frac{2\pi}{\sqrt{\varphi}\,\xi_h}\).
+- **Avoidance of commensurate ratios:**
+  Near-rational \(P/\xi_h\) can exhibit **metastable plateaus** under weak pinning; as pinning weakens the Lyapunov descent and contraction drive flow to \(\varphi\).
+- **Candidate systems:**
+  superfluid vortices (He-4, BEC), cholesteric/active nematics, type-II superconductors (flux tubes), optical vortex beams.
+  *(Applicability requires short-range locality/coarse-graining, scale separation, and weak anisotropy.)*
 
-### ✅ `/derivations/` - Mathematical Verification
-Comprehensive verification that every mathematical claim in the paper is correct.
+---
 
-**Main Script:** `golden_ratio_verification.py`
+## Why the logarithm?
 
-**Verification Philosophy:** *"Assume nothing is correct, verify everything independently"*
+Three independent routes yield a log-type relaxation term that, after nondimensionalization, contributes \(-\ln x\):
 
-**What it verifies (64 tests across 16 categories):**
-- All equation derivations and algebraic manipulations
-- Dimensional consistency of every physical quantity  
-- Numerical accuracy of all approximations
-- Theorem statements and proof logic
-- Boundary conditions and limiting behaviors
-- Cross-validation using multiple computational methods
-- Lyapunov descent property: E(T(x)) ≤ E(x) with equality only at φ
-- Contraction theorem: |(T²)'(x)| ≤ 1/4 guaranteeing geometric convergence
-- Fibonacci universality: r_{n+1} = T(r_n) for ALL generalized sequences
-- Physical predictions: even-odd oscillations, relaxation time scaling
-- Perturbation stability analysis with different epsilon thresholds
-- Metallic means extension and broader mathematical framework
+1. **Elastic-defect energetics:** line defects have self-energy \(\propto \ln(R/r_0)\); identify \(R\propto P\), \(r_0\sim \xi_h\), subtract a reference configuration.
+2. **Short-range overlap on helices:** angular averaging of decaying overlap kernels in helical geometry produces a \(\ln P\) contribution.
+3. **Scale invariance (RG-style):** with one positive scalar \(x\), the only additive invariant under \(x\mapsto \lambda x\) is \(\propto\ln x\).
 
-**Quality Assurance:**
-- Symbolic computation using SymPy (exact, not floating-point)
-- Independent derivation of every result from first principles
-- Machine-precision verification of key mathematical identities
-- Comprehensive error detection and diagnostic reporting
+---
+
+## Repository Layout
+
+> Adjust names to your actual tree; the roles below are what matter.
+
+- **`doc/`** — LaTeX source of the paper (includes Related Work, Methods, bibliography) and figures.
+- **`derivations/`** — SymPy scripts verifying each numbered identity and bound (derivatives, convexity, fixed points, Lyapunov step, contraction, robustness).
+- **`calculations/`** — Lightweight numerical demos (energy curves, \(T\)-iterations, robustness plots).
+
+Typical files:
+- `doc/golden_ratio.tex` — paper source
+- `derivations/golden_ratio_verification.py` — symbolic checks
+- `calculations/golden_ratio_calculations.py` — figure generation
+
+---
 
 ## Getting Started
 
-### Prerequisites
+### Requirements
 ```bash
-pip install numpy scipy matplotlib sympy
+python -m pip install sympy numpy matplotlib
+````
+
+### Build the paper
+
+Compile `doc/golden_ratio.tex`. If you use `hyperref` + `cleveref`, ensure:
+
+* `\usepackage{hyperref}` **before** `\usepackage[nameinlink]{cleveref}` (cleveref last)
+* Clean builds when switching options (`latexmk -C` or delete `.aux/.toc/.out`), then compile twice
+* If math appears in section titles, prefer `\texorpdfstring{$\cdot$}{ascii}`
+
+### Verify derivations
+
+```bash
+python derivations/golden_ratio_verification.py
 ```
 
-### Quick Start
+Checks include:
 
-1. **View the paper**: Compile `doc/golden_ratio.tex` with LaTeX
-2. **See the math in action**: Run `python calculations/golden_ratio_calculations.py`
-3. **Verify correctness**: Run `python derivations/golden_ratio_verification.py`
+* $E'_{a,b}(x)=a(x-1)-b/x$, $E''_{a,b}(x)=a+b/x^2>0$
+* Minimizer $x_\star=\tfrac{1+\sqrt{1+4(b/a)}}{2}$
+* For $a=b$: $E(Tx)\le E(x)$ with equality only at $x=\varphi$
+* $(T^2)'(x)=1/(x^2T(x)^2)\le 1/4$ on $[3/2,2]$
+* Robustness bound on a user-chosen $I=[1+\eta,X]$: $|x_\star-\varphi|\le \sqrt{2\Delta_I/m}$
 
-### Expected Results
+### Reproduce figures
 
-**Calculations Output:**
-- Multiple figure windows showing energy landscapes, convergence dynamics, robustness analysis, and Fibonacci connections
-- Console output with numerical verifications and physical parameter examples
-- Visual confirmation that φ emerges naturally from the mathematical structure
-
-**Verification Output:**
-```
-GOLDEN RATIO PAPER VERIFICATION SUMMARY: 64/64 checks passed (100.0%)
-🎉 GOLDEN RATIO PAPER MATHEMATICAL VERIFICATION COMPLETE! 🎉
+```bash
+python calculations/golden_ratio_calculations.py
 ```
 
-## Scientific Significance
+* Energy landscape with golden-ratio minimum
+* $T$-iteration convergence (even–odd oscillations, geometric decay)
+* Robustness: $|x^\ast-\varphi|$ vs perturbation strength (√-law)
+* Twist-rate scaling
 
-### Mathematical Innovation
-- **First rigorous proof** that φ emerges from physical energy minimization
-- **Quantitative robustness theorem** with explicit bounds on deviations
-- **Multiple independent derivations** confirming the logarithmic relaxation term
-- **Connection to optimal irrationality** via continued fraction theory
-- **Lyapunov descent theorem** proving φ is unique dynamic attractor under self-similarity
-- **Contraction mapping theorem** with |(T²)'(x)| ≤ 1/4 guaranteeing geometric convergence
-- **Fibonacci universality proof** showing T-map governs ALL generalized Fibonacci sequences
-- **Enhanced stability analysis** with critical epsilon thresholds for different perturbation types
+---
 
-### Physical Applications
-**Candidate Systems:**
-- Superfluid vortices (⁴He, Bose-Einstein condensates)
-- Cholesteric and active nematic liquid crystals  
-- Type-II superconductor flux tubes
-- Optical vortex beams and mode coupling
-- DNA supercoiling and protein folding structures
+## Notes on variables & generalizations
 
-**Experimental Predictions:**
-- Pitch ratios should cluster near `P/ξₕ ≈ √φ ≈ 1.272`
-- Twist rates should follow `τ = 2π/(√φ ξₕ)`
-- Structures should be robust against moderate perturbations
-- Rational pitch ratios should be actively avoided
-- Even-odd convergence oscillations with |x_{n+2} - φ| ≤ (1/4)|x_n - φ|
-- Relaxation time scaling: τ_relax ~ -ln|x₀ - φ|/ln(4) in reorganization events
-- Energy dissipation bursts during approach to φ (measurable via calorimetry)
-- Log-log slope signature approaching -ln(2) ≈ -0.693 in error decay
+* **Linear vs squared variables:** exact layering acts on $r=P/\xi_h$ via $\widehat T(r)=1+1/r$. Using $x=r^2$ induces $S(x)=(1+1/\sqrt{x})^2$. Results stated with $T$ on $x$ translate to $r$ (paper appendix gives details).
+* **Metallic-means family:** for the energy $E_{a,b}$ with ratio $k=b/a$, pairing with the **matched** map $T_k(x)=k+1/x$ selects the corresponding metallic mean. In the normalized case $k=1$ we recover $\varphi$.
 
-### Broader Impact
-- Provides mathematical foundation for φ in natural systems
-- Connects fundamental physics to optimal geometric proportions
-- Offers quantitative framework for analyzing hierarchical structures
-- Bridges pure mathematics (continued fractions, irrationals) with applied physics
+---
 
-## Key Mathematical Results
+## Scope & Assumptions
 
-| Concept | Formula | Significance |
-|---------|---------|--------------|
-| **Energy Functional** | `E(x) = ½(x-1)² - ln(x)` | Captures overlap penalty vs relaxation gain |
-| **Golden Ratio Emergence** | `E'(x) = 0 ⟹ x² - x - 1 = 0 ⟹ x = φ` | Unique critical point is golden ratio |
-| **Self-Similarity** | `T(φ) = φ` where `T(x) = 1 + 1/x` | Fixed point of layer-addition map |
-| **Robustness Bound** | `\|x* - φ\| ≤ √(2Δ/m)` | Quantitative stability under perturbations |
-| **Physical Scaling** | `τ = 2π/(√φ ξₕ)` | Measurable twist rate relationship |
-| **Optimal Irrationality** | `φ = [1; 1, 1, 1, ...]` | Maximal resistance to rational approximation |
-| **Lyapunov Descent** | `E(T(x)) ≤ E(x), equality ⟺ x = φ` | φ is unique dynamic attractor |
-| **Contraction Theorem** | `\|(T²)'(x)\| ≤ 1/4` | Guarantees geometric convergence to φ |
-| **Fibonacci Universality** | `r_{n+1} = T(r_n)` for ALL sequences | T-map governs generalized Fibonacci ratios |
+* Short-range/local coarse-graining valid; clear scale separation (core $\xi_c\ll\xi_h\ll$ system size); weak anisotropy.
+* Strong long-range interactions or hard boundaries can shift the optimum (captured by $\Delta_I$ in the robustness bound).
+* No claims are made about topological protection or reconnection dynamics beyond what is proved.
+
+---
 
 ## Citation
 
-If you use this work in your research, please cite:
-
 ```bibtex
 @article{golden_ratio_vortices,
-  title={Golden Ratio from Energy Minimization and Self-Similarity in Hierarchical Vortices},
-  author={Trevor Norris},
-  year={2025},
-  note={Available at: https://github.com/trevnorris/papers}
+  title   = {Golden Ratio from Energy Minimization and Self-Similarity in Hierarchical Vortices},
+  author  = {Trevor Norris},
+  year    = {2025},
+  note    = {Preprint with verification scripts and figures at https://github.com/trevnorris/papers}
 }
 ```
 
 ## License
 
-This work is licensed under a Creative Commons Attribution 4.0 International License.
+Creative Commons Attribution 4.0 International (CC BY 4.0).
 
 ## Contact
 
-trev.norris@gmail.com
-
----
-
-*This work demonstrates that the golden ratio φ = (1+√5)/2 is not a mysterious constant imposed from outside, but rather a mathematical necessity arising from the fundamental structure of hierarchical physical systems. Through rigorous mathematical analysis and comprehensive verification, we show that φ emerges inevitably as the unique solution that simultaneously satisfies energy minimization, self-similarity, robustness, optimal irrationality, **and dynamical stability** requirements. The new Lyapunov descent and contraction theorems prove that φ is not just a static optimum, but the **universal dynamic attractor** that systems naturally evolve toward through self-similar reorganization processes, unifying static optimization with dynamic evolution.*
+[trev.norris@gmail.com](mailto:trev.norris@gmail.com)

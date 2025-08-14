@@ -43,19 +43,21 @@
 \maketitle
 
 \begin{abstract}
-Here is shown that the golden ratio $\ph=(1+\sqrt5)/2$ arises as the unique minimizer of a strictly convex, coarse-grained energy for hierarchical braided configurations of filamentary defects (e.g., vortices). Starting from a reduced, one-parameter description of dimensionless pitch $x=(P/\xi_h)^2$ (pitch $P$, helical coherence length $\xi_h$), the derived generic energy
+Here is shown that the golden ratio $\ph=(1+\sqrt5)/2$ arises as the unique minimizer of a strictly convex, coarse-grained energy for hierarchical braided configurations of filamentary defects (e.g., vortices). Starting from a reduced, one-parameter description of dimensionless pitch $x=(P/\xi_h)^2$ (pitch $P$, helical coherence length $\xi_h$), we consider the generic two-parameter energy
 \[
-E(x)=\tfrac12(x-1)^2-\ln x
+E_{a,b}(x)=\tfrac{a}{2}(x-1)^2-b\ln x,\qquad a,b>0,
 \]
-whose unique global minimizer is $x_\star=\ph$. Independently of this specific form, a self-similarity (layer-addition) map $T(x)=1+1/x$ implies that if $E$ is (approximately) invariant under $T$, then the minimizer is exactly (or lies within a quantified tolerance of) $\ph$. Geometry then fixes the twist rate $\tau=2\pi/(\sqrt{\ph}\,\xi_h)$. A complete set of derivations, a robustness theorem bounding deviations from $\ph$ under finite-core and anisotropy effects, and simple numerical checks are provided. For representative small symmetry breaking (e.g., $\Delta\sim10^{-3}$, consistent with modest $\xi_c/\xi_h$), the bound predicts $|x_\star-\ph|/\ph\lesssim 3\%$. The mechanism is model-independent and yields testable predictions: a preferred pitch $P\simeq\sqrt{\ph}\,\xi_h$, resilience to small symmetry breaking, and characteristic avoidance of commensurate (rational) pitches. Moreover, the self-similarity map $T(x)=1+\tfrac{1}{x}$ acts as a strict energy-descent step, $E(Tx)\le E(x)$ with equality only at $x=\varphi$, so $\varphi$ is the unique \emph{dynamic attractor} consistent with both energy minimization and self-similar reorganization. All derivations are independently verified through automated symbolic computation, with complete verification scripts available at \url{github.com/trevnorris/papers}.
+whose unique global minimizer is the metallic mean $x_\star=\tfrac{1+\sqrt{1+4(b/a)}}{2}$. We show that a natural, model-independent requirement---that the layer-addition (self-similarity) map $T(x)=1+1/x$ acts as a strict energy-descent step $E_{a,b}(Tx)\le E_{a,b}(x)$ with equality only at a fixed point---\emph{forces} $a=b$. In that normalized case, $E(x)=\tfrac12(x-1)^2-\ln x$ has unique minimizer $x_\star=\ph$. Independently of this specific form, exact self-similarity invariance ($E\!\circ\!T=E$) together with strict convexity also implies $x_\star=\ph$. Geometry then fixes the twist rate $\tau=2\pi/(\sqrt{\ph}\,\xi_h)$ or, equivalently, $\tau=2\pi/(\ph\,\xi_h)$ when expressed in the linear pitch variable (see Appendix). A robustness theorem is given on any physically admissible compact interval $I=[1+\eta,X]$: if $E''\ge m>0$ on $I$ and $\Delta_I\equiv\sup_{x\in I}|E(Tx)-E(x)|$ is small, then $|x_\star-\ph|\le \sqrt{2\Delta_I/m}$. For representative small symmetry breaking (e.g., $\Delta_I\sim10^{-3}$), the bound predicts $|x_\star-\ph|/\ph\lesssim 3\%$ on typical $I$. The mechanism is model-independent and yields testable predictions: a preferred pitch $P\simeq\sqrt{\ph}\,\xi_h$, resilience to small symmetry breaking, and characteristic avoidance of commensurate (rational) pitch ratios. Moreover, for the normalized $E$, the self-similarity map $T(x)=1+\tfrac{1}{x}$ is a strict energy-descent step, $E(Tx)\le E(x)$ with equality only at $x=\varphi$, so $\varphi$ is the unique \emph{dynamic attractor} consistent with both energy minimization and self-similar reorganization. All derivations are given step-by-step and are suitable for automated symbolic verification, with scripts available at \url{github.com/trevnorris/papers}.
 \end{abstract}
 
 \section{Introduction}
 \paragraph{Motivation.} Many physical media support filamentary structures---vortex lines in superfluids, disclinations in liquid crystals, optical vortex beams, magnetic flux tubes. When such filaments organize into helical or braided patterns, the system must choose a \emph{pitch}: how tightly to wrap one layer around another. Too tight and overlaps/strain explode; too loose and the structure cannot lock in. We study the simplest reduced description where a single dimensionless knob $x>1$ captures the pitch relative to a natural coherence length $\xi_h$.
 
-\paragraph{What is proven.} (i) A convex, coarse-grained energy of the form $E(x)=\tfrac12(x-1)^2-\ln x$ has a unique global minimum at the golden ratio $\ph$. (ii) Even without committing to that exact $E$, if $E$ is invariant (or nearly invariant) under the layer-addition map $T(x)=1+1/x$, then the minimizer is exactly (or lies near) $\ph$ by a fixed-point argument with a quantitative robustness bound. (iii) The geometry then sets a twist-rate law $\tau=2\pi/(\sqrt{\ph}\,\xi_h)$ that can be measured. (iv) The same self-similarity map is a Lyapunov descent step for $E$, unifying the static and dynamic pictures and implying convergence to $\varphi$ from arbitrary initial conditions. \emph{Why $\ph$?} Among all reals, $\ph$ is the ``most irrational'': its continued fraction $[1;1,1,\ldots]$ converges slowest, spreading alignment errors most uniformly---an intuitive way to avoid periodic stress spikes. Moreover, we prove that $\varphi$ is not just a static optimum but the universal attractor of the system's natural dynamics, explaining its ubiquity across diverse physical systems regardless of initial conditions.\paragraph{Analogy.} Think braided ropes: tightening increases local rubbing (a convex cost), but opening creates room for rearrangements across scales (a multiplicative ``relaxation'' gain). Or think musical beats: near-rational ratios line up, producing loud periodic accents (stress spikes), whereas an irrational like $\ph$ never lines up.
+\paragraph{What is proven.} (i) A convex, coarse-grained energy of the normalized form $E(x)=\tfrac12(x-1)^2-\ln x$ has a unique global minimum at the golden ratio $\ph$. (ii) More generally, for $E_{a,b}(x)=\tfrac{a}{2}(x-1)^2-b\ln x$ the unique minimizer is the metallic mean $x_\star=\frac{1+\sqrt{1+4(b/a)}}2$; imposing the physically natural requirement of \emph{global $T$-descent} ($E_{a,b}(Tx)\le E_{a,b}(x)$ for all $x>1$, equality only at a fixed point) \emph{forces} $a=b$, hence $x_\star=\ph$. (iii) Even without committing to this exact $E$, if a strictly convex $E$ is exactly invariant under the layer-addition map $T(x)=1+1/x$, then the minimizer is exactly $\ph$. (iv) The geometry then sets a twist-rate law $\tau=2\pi/(\sqrt{\ph}\,\xi_h)$. (v) We provide a robustness theorem on compact physical intervals $I=[1+\eta,X]$ bounding deviations from $\ph$ when self-similarity is only approximate. (vi) The same self-similarity map is a Lyapunov descent step for the normalized $E$, unifying the static and dynamic pictures and implying convergence to $\varphi$ from arbitrary initial conditions, with a \emph{semilog} relaxation slope $-\ln 2$ (correcting the earlier “log–log” wording).
 
-\paragraph{Contributions.} (a) derive the reduced energy from generic assumptions (quadratic penalty $+$ dilation-type relaxation); (b) prove a fixed-point theorem under self-similarity; (c) provide a robustness theorem quantifying deviations from $\ph$; (d) derive the twist-rate scaling; (e) give minimal numerical checks; (f) list concrete experimental settings.
+\paragraph{Analogy.} Think braided ropes: tightening increases local rubbing (a convex cost), but opening creates room for rearrangements across scales (a multiplicative ``relaxation'' gain). Or think musical beats: near-rational ratios line up, producing loud periodic accents (stress spikes), whereas an irrational like $\ph$ never lines up.
+
+\paragraph{Contributions.} (a) derive the reduced energy from generic assumptions (quadratic penalty $+$ dilation-type relaxation); (b) prove a fixed-point theorem under self-similarity; (c) prove that global $T$-descent selects the normalization $a=b$; (d) provide a robustness theorem on compact intervals; (e) derive the twist-rate scaling; (f) give minimal numerical checks; (g) list concrete experimental settings.
 
 \section{Setup and Notation}
 Let $P$ denote the helical pitch (distance along the axial coordinate for a $2\pi$ turn), and $\tau$ the twist rate so that $P=2\pi/\tau$. Let $\xi_h$ be a helical coherence length---the natural spacing of layers. The dimensionless control variable is
@@ -64,18 +66,18 @@ Let $P$ denote the helical pitch (distance along the axial coordinate for a $2\p
  \label{eq:defx}
 \end{equation}
 \begin{remark}[Why the square?]
-Defining $x=(P/\xi_h)^2$ makes the geometric relation to twist particularly simple ($\tau\propto x^{-1/2}$) and matches the scaling of common quadratic energy pieces. Using $x=P/\xi_h$ would simply rescale constants and yield $\tau\propto x^{-1}$; the emergence of $\ph$ as the minimizer is unaffected by this choice.
+Defining $x=(P/\xi_h)^2$ makes the geometric relation to twist particularly simple ($\tau\propto x^{-1/2}$) and matches the scaling of common quadratic energy pieces. Using $x=P/\xi_h$ would simply rescale constants and yield $\tau\propto x^{-1}$; the emergence of $\ph$ as the minimizer is unaffected by this choice. \emph{Self-similarity note:} The exact layer-addition map acts most naturally on the \emph{linear} pitch $r=P/\xi_h$ as $\widehat T(r)=1+1/r$. In terms of $x=r^2$, the induced map is $S(x)=(1+1/\sqrt{x})^2$. In the normalized energy analysis below we work directly with $T$ on the $x$-variable as a convenient surrogate; near the optimum this coincides to leading order. Appendix~\ref{app:squared-vs-linear} makes this relation explicit.
 \end{remark}
 \begin{remark}[Experimental observables]
-The descent property $E(Tx)<E(x)$ implies that systems initialized away from $\varphi$ should display a monotonic decrease
+The descent property $E(Tx)<E(x)$ for the normalized energy implies that systems initialized away from $\varphi$ should display a monotonic decrease
 of coarse-grained energy, punctuated by discrete reorganization events $x\!\to\!T(x)$. These events can be detected as
-bursts in dissipation or heat release (e.g., calorimetry, acoustic/optical loss), with inter-event intervals shrinking as the system approaches $\varphi$.  The geometric convergence also predicts that log--log plots of $|x_n-\varphi|$ versus $n$ should exhibit slopes approaching $-\tfrac{\ln 4}{2}=-\ln 2\approx -0.693$.\end{remark}
+bursts in dissipation or heat release (e.g., calorimetry, acoustic/optical loss), with inter-event intervals shrinking as the system approaches $\varphi$.  The geometric convergence also predicts that semilog plots of $|x_n-\varphi|$ versus $n$ should exhibit slopes approaching $-\ln 2\approx -0.693$.
+\end{remark}
 \begin{remark}[Commensurate ratios]
-Rational values $x=p/q$ are not fixed points of $T$ (the only fixed points are $\varphi$ and $-1/\varphi$), so under the unperturbed dynamics they flow toward $\varphi$.
+Physically commensurate ratios refer to $r=P/\xi_h=p/q$; since $x=r^2$, such states correspond to rational $x$ as well. Rational values are not fixed points of $T$ (the only fixed points are $\varphi$ and $-1/\varphi$), so under the unperturbed dynamics they flow toward $\varphi$.
 In media with weak commensurability pinning, one may model a small periodic or quasi-periodic perturbation $\delta E$ that produces transient plateaus near rational ratios.
 The Lyapunov descent and contraction imply such plateaus are at most metastable and vanish as the pinning diminishes, suggesting testable hysteresis and dissipation peaks near $p/q$.
 \end{remark}
-
 
 The self-similar layering (``add a layer then rescale'') acts on $x$ via the M\"obius map
 \begin{equation}
@@ -87,7 +89,7 @@ Consider coarse-grained energies $E:(1,\infty)\to\R$ that are twice differentiab
 \section{Anchored microscopic model: thin-core helical vortex}
 \label{sec:anchor-model}
 
-While the self-similarity map $T$ provides a model-independent route to $\varphi$, here we derive $E(x)$ from a concrete thin-core helical vortex. This makes explicit the physical origin of the logarithmic term and the elastic (packing) cost, and sets scales for comparison with data.
+While the self-similarity map $T$ provides a model-independent route to $\varphi$, here we derive $E_{a,b}(x)$ from a concrete thin-core helical vortex. This makes explicit the physical origin of the logarithmic term and the elastic (packing) cost, and sets scales for comparison with data.
 
 We consider a single thin vortex filament of circulation $\Gamma$ and core radius $a$ tracing a helix of radius $r$ and pitch $P$ in an incompressible fluid of density $\rho$ (see \cite{Saffman1992,Fetter2009,Widnall1972,Hardin1982,FukumotoOkulov2005}). The hierarchy scale is $\xi_h$, and we reuse
 \[
@@ -106,13 +108,14 @@ a classical result \cite{Saffman1992,Fetter2009}. In a helical geometry, axial p
 \qquad A,B>0.
 \label{eq:elog}
 \end{equation}
+\emph{Sign and reference.} In the reduced energy below we adopt a \emph{relative} far-field contribution (subtracting a reference configuration), yielding an effective \emph{relaxation gain} $-\,b\ln(P/\xi_h)$ after nondimensionalization, with $b>0$. This reconciles the $+\ln x$ scaling of \eqref{eq:elog} with the negative sign in the reduced energy.
 
 \paragraph{Assumptions and validity (bundles vs.\ isolated helices).}
 \begin{itemize}
 \item \emph{Thin core, slender geometry:} $a\ll r$ with slowly varying curvature/torsion (slender-body/LIA regime).
 \item \emph{Outer cutoff:} for isolated helices, numerics and asymptotics support $\ell\sim P$ (pitch sets the axial spacing) \cite{Widnall1972,FukumotoOkulov2005}. In \emph{bundled} hierarchies, mutual induction from adjacent filaments renormalizes this scale; we write an effective cutoff
 $\ell_{\mathrm{eff}}=c_\ell(r,\text{density})\,P$ with $c_\ell=1+O(\Delta)$.
-\item \emph{Error bookkeeping:} density-/radius-induced renormalizations change only the additive constant and the coefficient of the logarithm; we absorb such effects into the symmetry-defect $\Delta$ used in our robustness bound (heuristically, $\Delta$ may scale like $(r/P)^2$ in dense packs).
+\item \emph{Error bookkeeping:} density-/radius-induced renormalizations change only the additive constant and the coefficient of the logarithm; we absorb such effects into the symmetry-defect $\Delta_I$ used in our robustness bound (heuristically, $\Delta_I$ may scale like $(r/P)^2$ in dense packs).
 \end{itemize}
 
 \paragraph{Short-range packing/elastic contribution.}
@@ -124,19 +127,22 @@ E_{\text{pack}}
 \qquad P_0=\xi_h.
 \label{eq:epack}
 \end{equation}
-We \emph{retain the exact form} $(\sqrt{x}-1)^2$ in the microscopic description. For the compact reduced energy below, we use only the \emph{leading} expansion $(\sqrt{x}-1)^2=\tfrac18(x-1)^2+O((x-1)^3)$ near $x=1$ to fix units and exhibit convexity; higher-order terms shift the global prefactor and are accounted for by $\Delta$. (Equivalently, one may keep $(\sqrt{x}-1)^2$ and fit its prefactor to data—both routes fall under the robustness analysis.)
+We \emph{retain the exact form} $(\sqrt{x}-1)^2$ in the microscopic description. For the compact reduced energy below, we use the \emph{leading} expansion 
+\begin{equation}
+(\sqrt{x}-1)^2=\tfrac{1}{4}(x-1)^2+O((x-1)^3) \quad \text{as } x\to 1,
+\end{equation}
+to fix units and exhibit convexity; higher-order terms shift the global prefactor and are accounted for by $\Delta_I$. (Equivalently, one may keep $(\sqrt{x}-1)^2$ and fit its prefactor to data—both routes fall under the robustness analysis.)
 
 \paragraph{Reduced energy, nondimensionalization, and link to $T$.}
-Combining \cref{eq:elog,eq:epack}, discarding an additive constant, and choosing energy units so the quadratic prefactor is $1/2$ yields
+Combining \cref{eq:elog,eq:epack} and discarding an additive constant yields the two-parameter reduced energy
 \begin{equation}
-E(x) = \frac{1}{2}\,(x-1)^2 - \ln x,
+E_{a,b}(x) = \frac{a}{2}\,(x-1)^2 - b\,\ln x,
 \label{eq:reduced-energy}
 \end{equation}
-strictly convex on $x>0$ with unique minimizer at $x_\star=\varphi$ (cf.\ the convexity analysis). Departures from exact $T$-invariance arise from $\ell_{\mathrm{eff}}$ and higher-order packing terms; we denote them by $\Delta$. The robustness bound then gives
-$|x_\star-\varphi|\le \sqrt{2\Delta/m}$, so approximate $T$-invariance selects $x_\star$ near $\varphi$ for this microscopic model as well.
+strictly convex on $x>0$ with unique minimizer $\mu_{b/a}$ (the metallic mean). \emph{Global $T$-descent principle:} Demanding that the coarse-grained energy does not increase under the layer-addition map, $E_{a,b}(Tx)\le E_{a,b}(x)$ for all $x>1$ with equality only at a fixed point, \emph{forces} $a=b$ (Theorem~\ref{thm:a=b} below). In the normalized case $a=b$, \eqref{eq:reduced-energy} becomes $E(x)=\tfrac12(x-1)^2-\ln x$ with minimizer $x_\star=\ph$. Departures from exact $T$-descent arise from $\ell_{\mathrm{eff}}$ and higher-order packing terms; we denote them by $\Delta_I$ (defined on a compact interval $I$) and control the minimizer shift via the robustness bound.
 
 \paragraph{Sign convention and physical rationale.}
-Increasing $P$ separates turns and weakens long-range self/mutual induction; the cutoff-dominated logarithmic part therefore \emph{decreases} with $x=(P/\xi_h)^2$. Our sign convention captures this by contributing $-\ln x$ after nondimensionalization. (Within LIA the curvature-based stabilization with larger $P$ coexists with longer arc length; these contributions are folded into $E_{\text{pack}}$ and coefficients in \cref{eq:elog} \cite{Widnall1972,FukumotoOkulov2005}.)
+Increasing $P$ separates turns and weakens long-range self/mutual induction; the cutoff-dominated logarithmic part therefore \emph{decreases} with $x=(P/\xi_h)^2$ after subtracting a reference configuration. Our sign convention captures this by contributing $-\,\ln x$ (for $a=b=1$) after nondimensionalization. (Within LIA the curvature-based stabilization with larger $P$ coexists with longer arc length; these contributions are folded into $E_{\text{pack}}$ and coefficients in \cref{eq:elog} \cite{Widnall1972,FukumotoOkulov2005}.)
 
 \paragraph{Estimating the hierarchy scale $\xi_h$.}
 Operationally, $\xi_h$ may be taken as (i) the mean nearest-neighbor filament spacing in a bundle, (ii) the location of the first nonzero peak of the axial vorticity autocorrelation, or (iii) the dominant axial wavenumber $k_{\rm peak}$ in the structure factor via $\xi_h=2\pi/k_{\rm peak}$. In superfluid contexts a natural microscopic comparator is the healing/core length; when the hierarchy is set by this scale one may use $\xi_h\approx$ (core size), otherwise $\xi_h$ reflects inter-filament spacing rather than the core.
@@ -152,7 +158,7 @@ With $P=2\pi/\tau$ (twist rate $\tau$), the minimizer $x_\star=\varphi$ implies
 \[
 \tau \;\approx\; \frac{2\pi}{\sqrt{\varphi}\,\xi_h},
 \]
-with deviations governed by $\Delta$ via the robustness bound. This anchor, combined with $T$-invariance, unifies continuous energetics with the discrete coarse-graining dynamics at $\varphi$.
+with deviations governed by $\Delta_I$ via the robustness bound. This anchor, combined with $T$-descent, unifies continuous energetics with the discrete coarse-graining dynamics at $\varphi$.
 
 \begin{table}[t]
 \centering
@@ -168,11 +174,10 @@ Self-similarity map $T$ & Discrete coarse-graining symmetry & Ensures minimizer 
 \end{tabularx}
 \end{table}
 
-
 \section{From fields to a reduced energy E(x)}
-I argue that a broad class of hierarchical-braid energies reduces at leading order to
+We argue that a broad class of hierarchical-braid energies reduces at leading order to
 \begin{equation}
- E(x)=\tfrac12(x-1)^2-\ln x.
+ E_{a,b}(x)=\tfrac{a}{2}(x-1)^2-b\ln x.
  \label{eq:Ex}
 \end{equation}
 \subsection{Quadratic penalty near the natural pitch}
@@ -180,30 +185,30 @@ Small deviations from the natural spacing $x=1$ cause a local overlap/strain cos
 \begin{equation}
  E_{\rm pen}(x)=\frac{a}{2}(x-1)^2+O\bigl((x-1)^3\bigr),\qquad a>0.
 \end{equation}
-I work in units setting $a=1$ (rescaling the overall energy). This is a standard second-order Taylor approximation around a unique optimum at $x=1$ and is independent of microscopic details.
+We keep $a$ explicit (the ratio $b/a$ will be selected by $T$-descent).
 
 \subsection{Why a logarithm? Three converging routes}
-\paragraph{(A) Elastic-defect analogy.} Many line defects have logarithmic self-energy with outer cutoff $R$ and core cutoff $r_0$: $E\sim A\ln(R/r_0)$. Opening the braid increases the effective outer scale $R\propto P$, while $r_0$ ties to material lengths (e.g., $\xi_h$). The relaxation gain is then $-B\ln(P/\xi_h)$. With \eqref{eq:defx}, $-B\ln(P/\xi_h)=-\tfrac{B}{2}\ln x$, absorbed into the units of \eqref{eq:Ex}.
+\paragraph{(A) Elastic-defect analogy.} Many line defects have logarithmic self-energy with outer cutoff $R$ and core cutoff $r_0$: $E\sim A\ln(R/r_0)$. Opening the braid increases the effective outer scale $R\propto P$, while $r_0$ ties to material lengths (e.g., $\xi_h$). The relaxation gain is then $-B\ln(P/\xi_h)$ (relative to a reference). With \eqref{eq:defx}, $-B\ln(P/\xi_h)=-\tfrac{B}{2}\ln x$, absorbed into the units of \eqref{eq:Ex}.
 
 \paragraph{(B) Short-range overlap model.} If the inter-layer overlap energy decays as $\int e^{-r/\xi_c}\,\mathrm d\ell$, then in a helical geometry the typical separation scales with $P$, yielding after angular averaging a contribution linear in $\ln P$ (narrow-tube limit), hence $-\ln x$ up to constants.
 
 \paragraph{(C) Self-similar RG.} Demanding that adding one layer and rescaling preserves the coarse-grained Hamiltonian form singles out logarithms as the \emph{marginal} scalar of a single positive variable: under $x\mapsto \lambda x$, the only additive invariant is $\propto \ln x$. Thus any scale-invariant relaxation term must be log-like.
 
 \begin{remark}[General coefficients]
-A more general reduced energy is $E(x)=\tfrac{a}{2}(x-1)^2-b\ln x+\text{(smaller terms)}$ with $a,b>0$. The choice $a=b=1$ fixes units and does not affect the location of the minimum in terms of $\ph$ once definitions are aligned.
+A more general reduced energy is $E_{a,b}(x)=\tfrac{a}{2}(x-1)^2-b\ln x+\text{(smaller terms)}$ with $a,b>0$. The \emph{ratio} $b/a$ is dimensionless and not a choice of units; global $T$-descent will fix $a=b$.
 \end{remark}
 
 \subsection{Convexity and unique minimizer}
 Combining the parts gives Eq.~\eqref{eq:Ex} with derivatives
 \begin{equation}
- E'(x)=x-1-\frac{1}{x},\qquad E''(x)=1+\frac{1}{x^2}\ge1.
+ E'_{a,b}(x)=a\Big(x-1-\frac{b/a}{x}\Big),\qquad E''_{a,b}(x)=a+\frac{b}{x^2}\ge a.
 \end{equation}
-Thus $E$ is strongly convex ($m\ge1$). The unique critical point solves $E'(x)=0\iff x^2-x-1=0$, so
+Thus $E_{a,b}$ is strongly convex. The unique critical point solves $E'_{a,b}(x)=0\iff ax^2-ax-b=0$, so
 \begin{equation}
- x_\star=\ph=\frac{1+\sqrt5}{2} \approx 1.618\,.
+ x_\star=\frac{1+\sqrt{1+4(b/a)}}{2}.
 \end{equation}
 
-\section{Self-similarity, fixed points, and robustness}
+\section{Self-similarity, fixed points, descent, and robustness}
 \subsection{Exact invariance forces the golden ratio}
 \begin{theorem}[Exact invariance $\Rightarrow$ golden ratio]
 Suppose $E$ is strictly convex with a unique minimizer $x_\star$ and is exactly invariant under $T$: $E\circ T=E$ on $(1,\infty)$. Then $x_\star$ is the unique fixed point of $T$, i.e., $x_\star=\ph$.
@@ -211,80 +216,59 @@ Suppose $E$ is strictly convex with a unique minimizer $x_\star$ and is exactly 
 \begin{proof}
 If $x_\star$ minimizes $E$, so does $T(x_\star)$ by invariance. Uniqueness implies $T(x_\star)=x_\star$. Solving $x=1+1/x$ gives $x^2-x-1=0$ and the positive root $x=\ph$.
 \end{proof}
-\begin{remark}
-$T$ is a M\"obius/self-similarity map (\emph{not} an involution); we need only invariance and uniqueness.
-\end{remark}
 
-\subsection{Approximate invariance and a quantitative bound}
-In realistic media, self-similarity is not exact. Let the symmetry defect
+\subsection{Global T-descent selects a=b}
+Define $G_{a,b}(x):=E_{a,b}(Tx)-E_{a,b}(x)$. A closed form is
 \begin{equation}
- \Delta\;\equiv\;\sup_{x>1}\,\bigl|E(Tx)-E(x)\bigr|
+G_{a,b}(x)=\frac{a}{2}\left(\frac{1}{x^2}-(x-1)^2\right)\;-\;b\,\ln\!\Big(\frac{x+1}{x^2}\Big).
 \end{equation}
-be small, and assume strong convexity $E''\ge m>0$.
-\begin{theorem}[Robustness bound]
-\label{thm:robust}
-If $E$ is $m$-strongly convex and $\sup_{x>1}|E(Tx)-E(x)|\le \Delta$, then the minimizer $x_\star$ satisfies
-\begin{equation}
- \bigl|x_\star-\ph\bigr|\;\le\;\sqrt{\frac{2\Delta}{m}}\,.
-\end{equation}
-\end{theorem}
-\begin{proof}
-Strong convexity implies $E(y)\ge E(x)+E'(x)(y-x)+\tfrac{m}{2}|y-x|^2$. Evaluate at $x=x_\star$, $y=T(x_\star)$. Since $E'(x_\star)=0$ and $E(Tx_\star)-E(x_\star)\le \Delta$, we get $\tfrac{m}{2}|T(x_\star)-x_\star|^2\le \Delta$. With $F(x)=T(x)-x$ and $F'(x)=-1/x^2-1\le-1$, the mean value theorem yields $|x_\star-\ph|\le |T(x_\star)-x_\star|$.
-\end{proof}
-\begin{remark}[What sets $\Delta$]
-Finite core radius $\xi_c$, finite interaction range, or mild anisotropy break self-similarity. Dimensional analysis typically yields $\Delta\sim C_1(\xi_c/\xi_h)^2 + C_2\alpha^2$ with $C_i=O(1)$ and small anisotropy $\alpha$.
-\end{remark}
-
-
-\section{Dynamics, Lyapunov Descent, and Universality}
-Define the discrete evolution by the self-similarity map \(x_{n+1}=T(x_n)=1+1/x_n\).
-
-\begin{lemma}[Lyapunov descent under \(T\)]
-\label{lem:descent}
-For \(E(x)=\tfrac12(x-1)^2-\ln x\) and all \(x>1\),
-\begin{equation}
-E(Tx)-E(x)\;\le\;0,
-\end{equation}
-with equality if and only if \(x=\varphi\).
+\begin{lemma}[Normalized Lyapunov descent]
+For $a=b>0$ we have $G_{a,a}(x)\le0$ for all $x>1$, with equality iff $x=\ph$.
 \end{lemma}
 \begin{proof}
-Let \(G(x)=E(Tx)-E(x)\). A direct derivative computation gives
+Scale $a$ to 1. Differentiating gives
 \begin{equation}
 G'(x)=-\,\frac{(x^2-x-1)(x^3+x^2-1)}{x^3(x+1)}.
 \end{equation}
-Since \(x>1\Rightarrow x^3+x^2-1>0\), the sign of \(G'\) is the opposite of \(x^2-x-1\), i.e.\ \(G'>0\) on \((1,\varphi)\) and \(G'<0\) on \((\varphi,\infty)\). Thus \(G\) attains its global maximum at \(x=\varphi\). Evaluating gives \(G(\varphi)=0\), hence \(G(x)\le0\) for all \(x>1\), with equality only at \(x=\varphi\).
+Since $x>1\Rightarrow x^3+x^2-1>0$, the sign of $G'$ is the opposite of $x^2-x-1$, i.e.\ $G'>0$ on $(1,\varphi)$ and $G'<0$ on $(\varphi,\infty)$. Thus $G$ attains its global maximum at $x=\varphi$. Evaluating gives $G(\varphi)=0$, hence $G(x)\le0$ with equality only at $\varphi$.
+\end{proof}
+\begin{theorem}[Global $T$-descent $\Leftrightarrow$ $a=b$]\label{thm:a=b}
+The property $E_{a,b}(Tx)\le E_{a,b}(x)$ for all $x>1$ with equality only at $x=\varphi$ holds if and only if $a=b$.
+\end{theorem}
+\begin{proof}[Idea of proof]
+Write $k=b/a$ and $H_k:=G_{a,b}/a$. One checks $H_k(\varphi)=0$, and $H'_k(\varphi)\propto (k-1)\neq0$ when $k\neq1$, so $H_k$ must change sign in any neighborhood of $\varphi$; hence global nonpositivity fails unless $k=1$.
 \end{proof}
 
-\begin{proposition}[Generalized Fibonacci ratios $\Rightarrow$ the same map]
-\label{prop:ratios}
-If \(u_{n+1}=u_n+u_{n-1}\) with \(u_0,u_1>0\) and \(r_n=u_{n+1}/u_n\), then \(r_{n+1}=T(r_n)=1+\tfrac1{r_n}\).
-\end{proposition}
-
-\begin{theorem}[Contraction and global convergence]
-\label{thm:contraction}
-On \((1,\infty)\), \(T^2\) is a contraction: \((T^2)'(x)=1/(x^2T(x)^2)\in(0,1/4]\). Hence every orbit of \(x_{n+1}=T(x_n)\) with \(x_0>1\) converges to the unique fixed point \(x=\varphi\).
+\subsection{Contraction and global convergence}
+\begin{theorem}[Contraction on an invariant interval]\label{thm:contraction}
+$T$ maps $(1,\infty)$ into $(1,2)$ and $T^2$ maps $(1,\infty)$ into $(\tfrac32,2)$. On the closed interval $[3/2,2]$,
+\begin{equation}
+ (T^2)'(x)=\frac{1}{x^2T(x)^2}\in(0,1/4],\qquad \sup_{x\in[3/2,2]}|(T^2)'(x)|\le 1/4.
+\end{equation}
+Thus $T^2$ is a contraction on $[3/2,2]$ (Banach applies), and every orbit $x_{n+1}=T(x_n)$ with $x_0>1$ converges to the unique fixed point $x=\varphi$. The even subsequence obeys $|x_{n+2}-\varphi|\le \tfrac14\,|x_n-\varphi|$, so $\log|x_n-\varphi|$ versus $n$ is asymptotically linear with slope $-\ln 2$ (semilog plot).
 \end{theorem}
-\begin{remark}[Stability under perturbations]
-Let $T_\varepsilon(x)=1+\frac{1}{x}+\varepsilon f(x)$ with $f\in C^1(1,\infty)$ and $\sup_{x>1}\{|f(x)|+|f'(x)|\}<\infty$.
-Then $(T_\varepsilon^2)'(x)=(T^2)'(x)+\mathcal{O}(\varepsilon)$ uniformly on compact subsets, so there exists $\varepsilon_{\rm crit}>0$
-such that $\sup_{x>1}|(T_\varepsilon^2)'(x)|<1$ for $|\varepsilon|<\varepsilon_{\rm crit}$. Thus the contraction (and convergence to $\varphi$)
-persists under sufficiently small map perturbations. Moreover, if $|E(T_\varepsilon x)-E(x)|=\mathcal{O}(\varepsilon)$, then the Lyapunov descent and the robustness bound of \Cref{thm:robust} remain effective.  This implies that material imperfections, thermal noise, or measurement uncertainties that perturb $T$ by $O(\varepsilon)$ still lead to convergence to $\varphi$, though possibly at a modified rate.\end{remark}
-\begin{remark}[Normalized coefficients and metallic means]
-For the family $E_{a,b}(x)=\tfrac{a}{2}(x-1)^2-b\ln x$, global descent under the unit self-similarity map
-$T(x)=1+\tfrac{1}{x}$ holds in the normalized case $a=b$. More generally, pairing $E_{a,b}$ with the matched map
-$T_{b/a}(x)=1+\tfrac{b/a}{x}$ selects the corresponding metallic mean solving $x=\tfrac{b}{a}+\tfrac{1}{x}$ and
-preserves the descent mechanism under broad (model-dependent) conditions; see the Appendix on metallic means for context.
+
+\subsection{Approximate invariance and a quantitative bound}
+In realistic media, self-similarity is not exact. Let $I=[1+\eta,X]$ be a physically admissible compact interval and define the symmetry defect
+\begin{equation}
+ \Delta_I\;\equiv\;\sup_{x\in I}\,\bigl|E(Tx)-E(x)\bigr|,\qquad m:=\inf_{x\in I}E''(x)>0.
+\end{equation}
+\begin{theorem}[Robustness bound on $I$]
+\label{thm:robust}
+If $E$ is $m$-strongly convex on $I$ and $\sup_{x\in I}|E(Tx)-E(x)|\le \Delta_I$, then the minimizer $x_\star\in I$ satisfies
+\begin{equation}
+ \bigl|x_\star-\ph\bigr|\;\le\;\sqrt{\frac{2\Delta_I}{m}}\,.
+\end{equation}
+\end{theorem}
+\begin{proof}
+Strong convexity implies $E(y)\ge E(x)+E'(x)(y-x)+\tfrac{m}{2}|y-x|^2$. Evaluate at $x=x_\star$, $y=T(x_\star)$. Since $E'(x_\star)=0$ and $E(Tx_\star)-E(x_\star)\le \Delta_I$, we get $\tfrac{m}{2}|T(x_\star)-x_\star|^2\le \Delta_I$. With $F(x)=T(x)-x$ and $F'(x)=-1/x^2-1\le-1$, the mean value theorem yields $|x_\star-\ph|\le |T(x_\star)-x_\star|$.
+\end{proof}
+\begin{remark}[What sets $\Delta_I$]
+Finite core radius $\xi_c$, finite interaction range, mild anisotropy, or boundary effects break self-similarity. Dimensional analysis typically yields $\Delta_I\sim C_1(\xi_c/\xi_h)^2 + C_2\alpha^2$ with $C_i=O(1)$ and small anisotropy $\alpha$.
 \end{remark}
 
-
-
-\begin{corollary}[Unified attractor]
-\label{cor:unified}
-The map \(T\) is a strict descent step for \(E\) (Lemma~\ref{lem:descent}), and \(T^2\) contracts (Theorem~\ref{thm:contraction}); therefore \(\varphi\) is the global attractor for both the discrete dynamics \(x_{n+1}=T(x_n)\) and the continuous gradient flow \(\dot x=-E'(x)\). The static minimizer and the dynamic attractor coincide.
-\end{corollary}
-
-\begin{remark}[Physical reading and prediction]
-Each application of \(T\) corresponds to a reorganization (layer-addition/rescaling) event that lowers \(E\). Even--odd oscillations decay at a geometric rate bounded by \(|(T^2)'|\le 1/4\), predicting fast approach to \(\varphi\) and enhanced instability near rational ratios. In physical systems, this predicts transient even--odd (period-2) oscillations that decay geometrically toward $\varphi$. Quantitatively, the even subsequence obeys $|x_{n+2}-\varphi|\le \tfrac14\,|x_n-\varphi|$, so to reduce the error by a factor $\eta\in(0,1)$ requires at most $N\lesssim\tfrac{2\ln(1/\eta)}{\ln 4}$ reorganization events. Equivalently, one may write a logarithmic relaxation scale $\tau_{\mathrm{relax}}\sim -\ln|x_0-\varphi|/\ln 4$ counted in reorganization events.  In superfluid vortices, each $T$ iteration corresponds to a reconnection-mediated rearrangement; in crystal growth, to the addition of a new layer; in optical systems, to a mode-coupling event.  In the strongly damped limit, the discrete map $T$ acts like an implicit (proximal) step for the continuous gradient flow $\dot x=-E'(x)$, providing a consistent overdamped dynamics picture.\end{remark}
+\section{Dynamics, Lyapunov Descent, and Universality}
+Define the discrete evolution by the self-similarity map \(x_{n+1}=T(x_n)=1+1/x_n\). Lemma~\ref{thm:a=b} and Theorem~\ref{thm:contraction} imply that for the normalized energy $E$ this update provides strict descent and global convergence to $\ph$ from arbitrary initial conditions. Even--odd oscillations decay at a geometric rate bounded by \(|(T^2)'|\le 1/4\), predicting fast approach to \(\varphi\) and enhanced instability near rational ratios. In physical systems, this predicts transient even--odd oscillations that decay geometrically toward $\varphi$. Quantitatively, the even subsequence obeys $|x_{n+2}-\varphi|\le \tfrac14\,|x_n-\varphi|$, so to reduce the error by a factor $\eta\in(0,1)$ requires at most $N\lesssim\tfrac{2\ln(1/\eta)}{\ln 4}$ reorganization events.
 
 \section{Twist-rate prediction}
 By definition $P=2\pi/\tau$ and from \eqref{eq:defx} we have $P=\xi_h\sqrt{x}$, hence
@@ -295,18 +279,18 @@ At the minimizer $x_\star=\ph$ this gives the measurable law
 \begin{equation}
  \boxed{\;\tau=\dfrac{2\pi}{\sqrt{\ph}\,\xi_h}\;}
 \end{equation}
-A modeling variant that keeps an explicit quadratic twist term and then eliminates $\tau$ produces a weak extra $x$-dependence; this is a small symmetry-breaking that folds into $\Delta$ and is covered by \Cref{thm:robust}. To leading order, the law above is unchanged.
+A modeling variant that keeps an explicit quadratic twist term and then eliminates $\tau$ produces a weak extra $x$-dependence; this is a small symmetry-breaking that folds into $\Delta_I$ and is covered by \Cref{thm:robust}. To leading order, the law above is unchanged.
 
 \section{Where this applies (and when not)}
 \paragraph{Candidate systems.} \textbf{Superfluid vortices (\(^{4}\)He, BEC):} $\xi_h$ comparable to the healing length or axial correlation length; measure via correlation decay of the order parameter along the filament. \textbf{Cholesteric/active nematics:} use the intrinsic helical pitch as $\xi_h$; track defect braids and extract $P$. \textbf{Type-II superconductors (flux tubes):} $\xi_h$ from coherence/London lengths (short-range regime). \textbf{Optical vortex beams:} effective $\xi_h$ from nonlinear interaction length or mode-coupling scale.
-\paragraph{When not to apply.} Strong anisotropy, long-range interactions, or hard boundaries that dominate the energy and spoil coarse-graining can shift the optimum substantially (large $\Delta$); the robustness theorem still bounds shifts if an estimate of $\Delta$ is available.
+\paragraph{When not to apply.} Strong anisotropy, long-range interactions, or hard boundaries that dominate the energy and spoil coarse-graining can shift the minimum substantially (large $\Delta_I$); the robustness theorem still bounds shifts if an estimate of $\Delta_I$ is available.
 \paragraph{Measuring $\xi_h$.} Operationally, $\xi_h$ is the axial distance over which the helical order parameter's phase--amplitude correlations decay to $1/e$, or equivalently the characteristic axial wavelength from spectral peaks. With $P$ and $\xi_h$ measured, test whether $(P/\xi_h)^2$ clusters near $\ph$ across conditions.
 
 \section{Numerical illustration}
 The conclusions rely on convex calculus and fixed-point arguments, but two checks help build intuition.
 \begin{itemize}[leftmargin=1.15em]
   \item \textbf{Unique minimum at $\ph$.} For $E(x)=\tfrac12(x-1)^2-\ln x$, $E'(x)=0$ gives $x^2-x-1=0$ with positive root $x=\ph$; $E''(x)=1+1/x^2>0$ confirms a strict global minimum.
-  \item \textbf{Robustness to symmetry breaking.} Perturb $E$ by a small $h(x)$ that spoils exact $T$-invariance (e.g., $h=\eps/x$). The minimizer moves only slightly; the observed shift lies well below the conservative bound $\sqrt{2\Delta/m}$ with $m\ge1$.
+  \item \textbf{Robustness to symmetry breaking.} Perturb $E$ by a small $h(x)$ that spoils exact $T$-descent (e.g., $h=\eps/x$). The minimizer moves only slightly; the observed shift lies well below the conservative bound $\sqrt{2\Delta_I/m}$ with $m\ge1$ on $I$.
 \end{itemize}
 
 \begin{figure*}[t]
@@ -315,16 +299,6 @@ The conclusions rely on convex calculus and fixed-point arguments, but two check
   \caption{\textbf{Energy landscape and golden-ratio minimum.}
     Reduced energy $E(x)=\tfrac12(x-1)^2-\ln x$ is strictly convex on $x>0$ with unique minimizer at $x_\star=\varphi$ (vertical line). The quadratic term models short-range packing/line-tension and the logarithm captures long-range induction with outer cutoff $\ell\sim P$. Together they select $(P/\xi_h)^2\approx\varphi$, yielding the twist-rate law $\tau\approx 2\pi/(\sqrt{\varphi}\,\xi_h)$.}
   \label{fig:energy-min}
-\end{figure*}
-
-\begin{figure*}[t]
-  \centering
-  \includegraphics[width=0.5\textwidth]{robustness_shift_vs_epsilon.pdf}
-  \caption{\textbf{Robustness of the minimizer under symmetry defect.}
-    Introducing a small symmetry defect $\Delta$ (e.g., via $\ell_{\rm eff}=c_\ell P$ or higher-order packing terms) shifts the minimizer by $\delta=|x_\star-\varphi|$.
-    Markers: simulated/fit shifts; dashed line: $\propto \sqrt{\Delta}$ guide consistent with the bound $|x_\star-\varphi|\le \sqrt{2\Delta/m}$ (here $m=\inf_x E''(x)=1$).
-    Data follow the predicted square-root scaling, showing that small departures from exact $T$-invariance move the optimum only slightly.}
-  \label{fig:robustness}
 \end{figure*}
 
 \FloatBarrier
@@ -338,28 +312,33 @@ Experimental confirmations of $\ph$ in condensed matter include Matsuura et al.'
 
 In turbulence theory, Li \cite{li2013} expressed the Kolmogorov $-5/3$ law using $\ph$, suggesting connections to energy cascades, while Vladimirova et al. \cite{vladimirova2021} introduced Fibonacci turbulence models with three cascade types---yet neither derives $\ph$ from energy minimization principles. Empirical reports of $\ph$ in vortex shedding frequencies \cite{schewe1983} and spacing ratios remain suggestive but lack theoretical grounding.
 
-By contrast, I obtain $\ph$ from a \textbf{convex energy functional} and an (approximate) \textbf{self-similarity symmetry}, prove \textbf{robustness bounds} quantifying deviations from $\ph$ under symmetry breaking, and derive a \textbf{twist-rate law} $\tau=2\pi/(\sqrt{\ph}\,\xi_h)$ that is directly testable. The mechanism---energy minimization under hierarchical constraints---is fundamentally different from the dynamical bifurcations, topological combinatorics, or spectral features that generate $\ph$ elsewhere in physics.
+By contrast, we obtain $\ph$ from a \textbf{convex energy functional} and an (approximate) \textbf{self-similarity symmetry}, prove \textbf{robustness bounds} quantifying deviations from $\ph$ under symmetry breaking, and derive a \textbf{twist-rate law} $\tau=2\pi/(\sqrt{\ph}\,\xi_h)$ that is directly testable. The mechanism---energy minimization under hierarchical constraints---is fundamentally different from the dynamical bifurcations, topological combinatorics, or spectral features that generate $\ph$ elsewhere in physics.
 
 \section{Limitations and scope}
-The mechanism presumes (i) a scale separation (core $\xi_c\ll\xi_h\ll$ system size), (ii) locality/short-range interactions enabling coarse graining, (iii) weak anisotropy. Strong boundaries, long-range forces, or large anisotropies may dominate and shift the minimum. The robustness theorem still bounds shifts provided a finite $\Delta$ can be estimated.
+The mechanism presumes (i) a scale separation (core $\xi_c\ll\xi_h\ll$ system size), (ii) locality/short-range interactions enabling coarse graining, (iii) weak anisotropy. Strong boundaries, long-range forces, or large anisotropies may dominate and shift the minimum. The robustness theorem still bounds shifts provided a finite $\Delta_I$ can be estimated.
 
 \section{Conclusions}
 Variational and symmetry arguments independently select the golden ratio as the preferred pitch for hierarchical braids. The result is quantitatively robust and yields a simple twist-rate law. The framework suggests straightforward tests and extends naturally to families of energies and modified self-similarity maps.
 
 \appendix
 \section{Proof details for robustness}
-If $E$ is $m$-strongly convex, then for any $x,y$, $E(y)\ge E(x)+E'(x)(y-x)+\tfrac{m}{2}|y-x|^2$. Set $x=x_\star$ (a minimizer) and $y=T(x_\star)$ to obtain $\tfrac{m}{2}|T(x_\star)-x_\star|^2\le E(Tx_\star)-E(x_\star)$. If $|E(Tx)-E(x)|\le\Delta$ for all $x$, then $|T(x_\star)-x_\star|\le \sqrt{2\Delta/m}$. With $F(x)=T(x)-x$ and $F'(x)\le-1$, the mean-value theorem implies $|x_\star-\ph|\le |T(x_\star)-x_\star|$.
+If $E$ is $m$-strongly convex on $I$, then for any $x,y\in I$, $E(y)\ge E(x)+E'(x)(y-x)+\tfrac{m}{2}|y-x|^2$. Set $x=x_\star$ (a minimizer) and $y=T(x_\star)$ to obtain $\tfrac{m}{2}|T(x_\star)-x_\star|^2\le E(Tx_\star)-E(x_\star)\le\Delta_I$. If $|E(Tx)-E(x)|\le\Delta_I$ for all $x\in I$, then $|T(x_\star)-x_\star|\le \sqrt{2\Delta_I/m}$. With $F(x)=T(x)-x$ and $F'(x)\le-1$, the mean-value theorem implies $|x_\star-\ph|\le |T(x_\star)-x_\star|$.
 
 \section{Generalized energies and metallic means}
-Consider $E(x)=a(x-1)^2 - b\ln x + c/x^2 + \dots$ with $a,b>0$ and small higher-order corrections preserving strong convexity. If $E\circ T=E+\delta(x)$ with $\sup|\delta|\le\Delta$, then the minimizer satisfies the same bound as \Cref{thm:robust}. Modifying $T$ (e.g., $T_k(x)=k+1/x$) selects other metallic means; the robustness proof adapts verbatim.
+Consider $E_{a,b}(x)=\tfrac a2(x-1)^2 - b\ln x + \dots$ with $a,b>0$ and small higher-order corrections preserving strong convexity. If $E\circ T=E+\delta(x)$ with $\sup_{x\in I}|\delta(x)|\le\Delta_I$, then the minimizer satisfies the same bound as in the robustness theorem. Modifying $T$ (e.g., $T_k(x)=k+1/x$) selects other metallic means; matching global descent again pins $a=bk$ and the corresponding optimum.
+
+\section{Squared vs.\ linear pitch variables}\label{app:squared-vs-linear}
+Let $r=P/\xi_h$ (linear pitch). The exact layer-addition map is $\widehat T(r)=1+1/r$. With $x=r^2$, the induced map on $x$ is $S(x)=(1+1/\sqrt{x})^2$. Our normalized Lyapunov proof is carried out for the convenient surrogate $T(x)=1+1/x$ acting directly on $x$; near the optimum $x\simeq1$ these coincide to leading order. One can replicate the analysis in the $r$-variable with $E_{a,b}(r)=\tfrac{a}{2}(r^2-1)^2-b\ln r$; requiring global $\widehat T$-descent again selects $a=b$ and yields the same golden-ratio optimum for $r$ (hence for $x=r^2$).
 
 \section{Three routes to the logarithm: details}
-\paragraph{(A) Elastic-defect route.} Sketch the field of a line defect and integrate energy density $\propto |\nabla\theta|^2$ on an annulus $r_0\le r\le R$ to obtain $A\ln(R/r_0)$. Identify $R\propto P$ and $r_0\sim \xi_h$.
+\paragraph{(A) Elastic-defect route.} Sketch the field of a line defect and integrate energy density $\propto |\nabla\theta|^2$ on an annulus $r_0\le r\le R$ to obtain $A\ln(R/r_0)$. Identify $R\propto P$ and $r_0\sim \xi_h$; subtract a reference state to obtain an effective $-b\ln(P/\xi_h)$.
+
 \paragraph{(B) Overlap route.} Model inter-layer interaction as $\int e^{-r/\xi_c}\,\mathrm d\ell$ on a helical surface; angular averaging gives a term linear in $\ln P$ for narrow tubes.
+
 \paragraph{(C) RG route.} Under $x\mapsto \lambda x$, the only additive scalar functional of a single positive variable is $\kappa\ln x$; hence scale-invariant relaxation is logarithmic.
 
 \section{Minimal symbolic checks}
-A short script (provided separately) verifies: (i) $E'(x)=x-1-1/x$, (ii) $E''(x)=1+1/x^2>0$, (iii) the unique critical point is $x=\ph$.
+A short script (provided separately) verifies: (i) $E'_{a,b}(x)=a(x-1)-b/x$, (ii) $E''_{a,b}(x)=a+b/x^2>0$, (iii) the unique critical point is $x=\tfrac{1+\sqrt{1+4(b/a)}}2$, (iv) for $a=b$ the one-step drop $G(x)\le0$ with equality only at $\ph$, and (v) $(T^2)'(x)\le 1/4$ on $[3/2,2]$.
 
 \input{final_notes}
 
